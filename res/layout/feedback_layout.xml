@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffffee">
+
+    <Button
+        android:id="@+id/cmdCorrectDeviceNameSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtCorrectDeviceName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Submit"
+        android:minWidth="100dp"
+        android:minHeight="45dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/smallText" />
+
+    <TextView
+        android:id="@+id/lblPlsWiteCorrectAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="128dp"
+        android:gravity="center"
+        android:text="Correct appliance name?"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/smallText" />
+
+    <EditText
+        android:id="@+id/txtCorrectDeviceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblPlsWiteCorrectAppName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:textColor="@color/silver"
+        android:textSize="@dimen/smallText" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

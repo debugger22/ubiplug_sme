@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings" android:visible="true">
+    </item>
+    
+     <item
+        android:id="@+id/action_about_cd"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_about" android:visible="true">
+    </item>   
+    
+    <item android:id="@+id/mnuConnStatus"
+          android:showAsAction="always"
+          android:visible="true" 
+          android:enabled="false"
+          android:title="Not Connected">    
+    </item>
+	
+	<item android:id="@+id/mnuData"
+          android:showAsAction="always"
+          android:visible="true"
+          android:enabled="false" 
+          android:title="">    
+    </item>
+    
+    
+</menu>

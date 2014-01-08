@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings" android:visible="true">
+    </item>
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_about" android:visible="true">
+    </item>
+    <item android:id="@+id/mnuScan"
+          android:showAsAction="always"
+          android:visible="true" 
+          android:title="@string/start_scan">
+        
+    </item>
+
+</menu>
