@@ -71,6 +71,7 @@ public class FeedbackActivity extends Activity{
 				mBuilder.setSound(uri);
 				mBuilder.setTicker("Sending your response.");
 				mBuilder.setOngoing(true);
+				
 				mNotifyMgr.notify(mNotificationId, mBuilder.build());
 		    	try {
 		        	AsyncHttpClient client = new AsyncHttpClient();

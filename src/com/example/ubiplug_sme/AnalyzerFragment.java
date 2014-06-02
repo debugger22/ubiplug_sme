@@ -308,7 +308,7 @@ public class AnalyzerFragment extends Fragment implements OnClickListener{
 	        	    	if(response.intern()=="can't resolve host" || response.intern()=="socket time out"){
 	        	    		updateStatus("Could not connect, please try again.");
 	        	    	}
-	        	    	updateStatus(response);
+	        	    	updateStatus(response);	
         	    	}catch(NullPointerException e){
         	    		//updateStatus("Something went wrong.");
         	    		updateStatus(response);

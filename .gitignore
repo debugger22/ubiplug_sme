@@ -1,0 +1,11 @@
+.classpath
+.cproject
+.project
+proguard-project.txt
+project.properties
+bin/
+Debug/
+libs/
+obj/
+jni/Android.mk
+
