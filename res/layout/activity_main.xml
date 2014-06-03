@@ -1,59 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ffffee"
-    tools:context=".MainActivity" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:card="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/silver"
+      android:paddingTop="30dp"
+      android:paddingRight="5dp"
+      android:paddingLeft="5dp"
+      android:paddingBottom ="5dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical" >
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+    
+    <it.gmariotti.cardslib.library.view.CardListView
+        xmlns:card="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list_cards"
+        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout" />
 
-        <ListView
-            android:id="@+id/deviceListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </LinearLayout>
+      </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/linearLayout1"
-        android:visibility="invisible" />
+      <!--<include layout="@layout/list_card_undo_message"/>-->
 
-    <TextView
-        android:id="@+id/lblValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/linearLayout1"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/linearLayout1"
-        android:gravity="center"
-        android:text=""
-        android:textSize="@dimen/smalllogosize"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/lblStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_alignParentBottom="true"
-        android:text=""
-        android:textColor="#009900" />
-
-</RelativeLayout>
+  </FrameLayout>

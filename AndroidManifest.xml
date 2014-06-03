@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ubiplug_sme"
+    package="com.pirhoalpha.awairhome"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
 	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-	<uses-permission android:name="android.permission.INTERNET" /> 
-	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 	
     <application
         android:allowBackup="true"
@@ -20,7 +18,7 @@
         <meta-data android:name="android.support.UI_OPTIONS"
 	           android:value="splitActionBarWhenNarrow" />
         <activity
-            android:name="com.example.ubiplug_sme.SplashActivity"
+            android:name="com.pirhoalpha.awairhome.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,25 +27,11 @@
             </intent-filter>   
        </activity>
        <activity
-            android:name="com.example.ubiplug_sme.MainActivity"
+            android:name="com.pirhoalpha.awairhome.MainActivity"
             android:label="@string/home" >
 
        </activity>
-       <activity
-            android:name="com.example.ubiplug_sme.ConnectDevice"
-            android:label="Explorer"
-            android:parentActivityName="com.example.ubiplug_sme.MainActivity">
 
-           
-       </activity>
-       <activity
-            android:name="com.example.ubiplug_sme.AboutActivity"
-            android:label="@string/action_about" >
-       </activity>
-        <activity
-            android:name="com.example.ubiplug_sme.FeedbackActivity"
-            android:label="@string/activity_feedback" >
-       </activity>
 </application>
 
 </manifest>

@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@color/splash_background">
+    android:background="@android:color/holo_blue_dark">
 
-    <TextView
+    <com.mattkula.secrettextview.SecretTextView
         android:id="@+id/lblLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +14,7 @@
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white"
-        android:textSize="@dimen/smalllogosize"
+        android:textSize="@dimen/bigText"
         android:typeface="serif" />
 
 </RelativeLayout>

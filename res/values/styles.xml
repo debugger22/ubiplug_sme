@@ -10,6 +10,7 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        
     </style>
 
     <!-- Application theme. -->
@@ -19,5 +20,6 @@
 	<style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
 	    <item name="android:windowActionBar">false</item>
 	    <item name="android:windowNoTitle">true</item>
+	    
 	</style> 
 </resources>

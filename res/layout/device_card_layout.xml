@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@color/gk_green">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_device_access_bluetooth_searching" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Bluetooth Device"
+            android:textSize="@dimen/normalText"
+            android:textColor="@color/gray" />
+         
+        <TextView
+            android:id="@+id/txt_rssi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-1554" 
+            android:textSize="@dimen/smallText"
+            android:textColor="@color/silver"/>
+
+        <TextView
+            android:id="@+id/txt_mac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C1:D5:A7:W9:V8"
+            android:textSize="@dimen/smallText"
+            android:textColor="@color/silver" />
+
+    </LinearLayout>
+
+</LinearLayout>

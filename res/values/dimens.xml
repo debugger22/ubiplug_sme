@@ -4,8 +4,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="smalllogosize">35dp</dimen>
+    <dimen name="veryBigText">50dp</dimen>
+    <dimen name="normalBigText">32dp</dimen>
     <dimen name="bigText">30dp</dimen>
+    <dimen name="mediumText">25dp</dimen>
     <dimen name="normalText">20dp</dimen>
+    <dimen name="okText">18dp</dimen>
     <dimen name="smallText">15dp</dimen>
-
+    <dimen name="verySmallText">11dp</dimen>
+    <dimen name="bigwheelradius">150dp</dimen>
+    <dimen name="barWidth">14dp</dimen>
+    <dimen name="rimWidth">14dp</dimen>
 </resources>
