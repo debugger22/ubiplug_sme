@@ -5,7 +5,6 @@ import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 import it.gmariotti.cardslib.library.view.CardView;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -115,10 +113,13 @@ public class MainActivity extends Activity implements Serializable {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				ConnectThread connection = new ConnectThread(
-						MainActivity.this.deviceList.get(arg2));
-				Log.v("Connection", connection.toString());
-
+				/*
+				 * ConnectThread connection = new ConnectThread(
+				 * MainActivity.this.deviceList.get(arg2)); Log.v("Connection",
+				 * connection.toString());
+				 */
+				MainActivity.this.startActivity(new Intent(MainActivity.this,
+						BluetoothHDPActivity.class));
 			}
 
 		});
@@ -203,8 +204,9 @@ public class MainActivity extends Activity implements Serializable {
 						MainActivity.this.mCardArrayAdapter
 								.notifyDataSetChanged();
 						if (!MainActivity.this.sent) {
-							ConnectThread connection = new ConnectThread(device);
-							Log.v("Bluetooth", connection.toString());
+							// ConnectThread connection = new
+							// ConnectThread(device);
+							// Log.v("Bluetooth", connection.toString());
 						}
 						MainActivity.this.sent = true;
 
@@ -221,6 +223,8 @@ public class MainActivity extends Activity implements Serializable {
 		// Register the BroadcastReceiver
 		this.filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 		registerReceiver(this.mReceiver, this.filter);
+		MainActivity.this.startActivity(new Intent(MainActivity.this,
+				BluetoothHDPActivity.class));
 	}
 	@Override
 	protected void onStart() {
@@ -319,59 +323,5 @@ public class MainActivity extends Activity implements Serializable {
 		card.setSwipeable(true);
 		// MainActivity.this.mCardArrayAdapter.setEnableUndo(true);
 		return card;
-	}
-
-	private class ConnectThread extends Thread {
-		private final BluetoothSocket mmSocket;
-
-		public ConnectThread(BluetoothDevice device) {
-			// Use a temporary object that is later assigned to mmSocket,
-			// because mmSocket is final
-			BluetoothSocket tmp = null;
-
-			// Get a BluetoothSocket to connect with the given BluetoothDevice
-			try {
-				// MY_UUID is the app's UUID string, also used by the server
-				// code
-				tmp = device.createRfcommSocketToServiceRecord(UBIPLUG_SERVICE);
-			} catch (IOException e) {
-			}
-			this.mmSocket = tmp;
-		}
-
-		@Override
-		public void run() {
-			// Cancel discovery because it will slow down the connection
-			MainActivity.this.mBluetoothAdapter.cancelDiscovery();
-
-			try {
-				// Connect the device through the socket. This will block
-				// until it succeeds or throws an exception
-				this.mmSocket.connect();
-				runOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Log.v("Bluetooth", String
-								.valueOf(ConnectThread.this.mmSocket
-										.isConnected()));
-					}
-
-				});
-			} catch (IOException connectException) {
-				// Unable to connect; close the socket and get out
-				Log.v("Bluetooth", connectException.toString());
-				try {
-					this.mmSocket.close();
-				} catch (IOException closeException) {
-					Log.v("Bluetooth", closeException.toString());
-				}
-				return;
-			}
-
-			// Do work to manage the connection (in a separate thread)
-			// manageConnectedSocket(this.mmSocket);
-		}
 	}
 }

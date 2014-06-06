@@ -94,25 +94,25 @@ public final class R {
 		public static final int ic_menu_overflow_card_rounded_dark_normal = 0x7f020017;
 		public static final int ic_menu_overflow_card_rounded_dark_pressed = 0x7f020018;
 		public static final int ic_undobar_undo = 0x7f020019;
-		public static final int pressed_background_card = 0x7f02001a;
-		public static final int pressed_background_kitkat_card = 0x7f02001b;
-		public static final int undobar = 0x7f02001c;
-		public static final int undobar_button_focused = 0x7f02001d;
-		public static final int undobar_button_pressed = 0x7f02001e;
-		public static final int undobar_divider = 0x7f02001f;
+		public static final int pressed_background_card = 0x7f02001d;
+		public static final int pressed_background_kitkat_card = 0x7f02001e;
+		public static final int undobar = 0x7f02001f;
+		public static final int undobar_button_focused = 0x7f020020;
+		public static final int undobar_button_pressed = 0x7f020021;
+		public static final int undobar_divider = 0x7f020022;
 	}
 	public static final class id {
 		public static final int card_content_expand_layout = 0x7f050015;
-		public static final int card_expand_inner_simple_title = 0x7f050022;
+		public static final int card_expand_inner_simple_title = 0x7f05002a;
 		public static final int card_header_button_expand = 0x7f05000d;
 		public static final int card_header_button_frame = 0x7f05000b;
 		public static final int card_header_button_other = 0x7f05000e;
 		public static final int card_header_button_overflow = 0x7f05000c;
 		public static final int card_header_inner_frame = 0x7f05000a;
-		public static final int card_header_inner_simple_title = 0x7f050023;
+		public static final int card_header_inner_simple_title = 0x7f05002b;
 		public static final int card_header_layout = 0x7f050014;
 		public static final int card_main_content_layout = 0x7f050011;
-		public static final int card_main_inner_simple_title = 0x7f050024;
+		public static final int card_main_inner_simple_title = 0x7f05002c;
 		public static final int card_main_layout = 0x7f050013;
 		public static final int card_overlap = 0x7f050016;
 		public static final int card_shadow_layout = 0x7f050012;
@@ -120,10 +120,10 @@ public final class R {
 		public static final int card_thumb_and_content_layout = 0x7f050017;
 		public static final int card_thumbnail_image = 0x7f050010;
 		public static final int card_thumbnail_layout = 0x7f050018;
-		public static final int list_cardId = 0x7f050025;
-		public static final int list_card_undobar = 0x7f050026;
-		public static final int list_card_undobar_button = 0x7f050028;
-		public static final int list_card_undobar_message = 0x7f050027;
+		public static final int list_cardId = 0x7f05002d;
+		public static final int list_card_undobar = 0x7f05002e;
+		public static final int list_card_undobar_button = 0x7f050030;
+		public static final int list_card_undobar_message = 0x7f05002f;
 		public static final int undobar = 0x7f050019;
 		public static final int undobar_button = 0x7f05001b;
 		public static final int undobar_message = 0x7f05001a;
@@ -141,12 +141,12 @@ public final class R {
 		public static final int card_thumbnail_layout = 0x7f030008;
 		public static final int card_thumbnail_overlay_layout = 0x7f030009;
 		public static final int card_undo_layout = 0x7f03000a;
-		public static final int inner_base_expand = 0x7f03000e;
-		public static final int inner_base_header = 0x7f03000f;
-		public static final int inner_base_main = 0x7f030010;
-		public static final int list_card_layout = 0x7f030011;
-		public static final int list_card_thumbnail_layout = 0x7f030012;
-		public static final int list_card_undo_message = 0x7f030013;
+		public static final int inner_base_expand = 0x7f03000f;
+		public static final int inner_base_header = 0x7f030010;
+		public static final int inner_base_main = 0x7f030011;
+		public static final int list_card_layout = 0x7f030012;
+		public static final int list_card_thumbnail_layout = 0x7f030013;
+		public static final int list_card_undo_message = 0x7f030014;
 	}
 	public static final class plurals {
 		public static final int card_selected_items = 0x7f0a0001;

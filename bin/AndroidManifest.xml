@@ -31,7 +31,12 @@
             android:label="@string/home" >
 
        </activity>
+       <activity
+            android:name="com.pirhoalpha.awairhome.BluetoothHDPActivity"
+            android:label="@string/home" >
 
+       </activity>
+       
 </application>
 
 </manifest>
