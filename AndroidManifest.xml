@@ -32,10 +32,16 @@
 
        </activity>
        <activity
-            android:name="com.pirhoalpha.awairhome.BluetoothHDPActivity"
+            android:name="com.pirhoalpha.awairhome.FirstActivity"
             android:label="@string/home" >
 
        </activity>
+        <activity android:name="app.akexorcist.bluetoothspp.DeviceList" />       
+        <service
+            android:name="com.pirhoalpha.awairhome.BluetoothHDPService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
        
 </application>
 
