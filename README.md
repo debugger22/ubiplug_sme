@@ -1,4 +1,4 @@
-# @Sid Add [this](https://github.com/akexorcist/Android-BluetoothSPPLibrary) is a dependency in the latest change.
+# @Sid [This](https://github.com/akexorcist/Android-BluetoothSPPLibrary) is a dependency in the latest change.
 
 ubiplug_sme
 ===========
