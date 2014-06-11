@@ -36,7 +36,8 @@
             android:label="@string/home" >
 
        </activity>
-        <activity android:name="app.akexorcist.bluetoothspp.DeviceList" />       
+        <activity android:name="app.akexorcist.bluetoothspp.DeviceList" />
+        <activity android:name=".ConnectActivity" />       
         <service
             android:name="com.pirhoalpha.awairhome.BluetoothHDPService"
             android:enabled="true"

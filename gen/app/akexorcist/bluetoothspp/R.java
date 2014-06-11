@@ -8,15 +8,15 @@ package app.akexorcist.bluetoothspp;
 
 public final class R {
 	public static final class dimen {
-		public static final int bluetooth_spp_padding = 0x7f040001;
-		public static final int bluetooth_spp_text_size = 0x7f040000;
+		public static final int bluetooth_spp_padding = 0x7f060003;
+		public static final int bluetooth_spp_text_size = 0x7f060002;
 	}
 	public static final class id {
-		public static final int button_scan = 0x7f06002b;
-		public static final int list_devices = 0x7f06002a;
+		public static final int button_scan = 0x7f09003e;
+		public static final int list_devices = 0x7f09003d;
 	}
 	public static final class layout {
-		public static final int device_list = 0x7f03000f;
-		public static final int device_name = 0x7f030010;
+		public static final int device_list = 0x7f030012;
+		public static final int device_name = 0x7f030013;
 	}
 }

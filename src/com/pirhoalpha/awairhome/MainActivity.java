@@ -1,13 +1,9 @@
 package com.pirhoalpha.awairhome;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.view.CardListView;
-import it.gmariotti.cardslib.library.view.CardView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -32,9 +28,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
-
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends Activity implements Serializable {
 
@@ -46,27 +41,17 @@ public class MainActivity extends Activity implements Serializable {
 	private MenuItem mnuScan;
 	private IntentFilter filter;
 	private BroadcastReceiver mReceiver;
-	private int colorCounter = 0;
+	private final int colorCounter = 0;
 	Boolean sent = false;
 
 	ArrayList<String> deviceNames = new ArrayList<String>();
 	ArrayList<Card> cards = new ArrayList<Card>();
-	CardArrayAdapter mCardArrayAdapter;
-	CardListView listView;
+	ArrayAdapter<String> deviceArrayAdapter;
+	ListView listView;
 
 	ArrayList<ColorDrawable> bkgDrawables = new ArrayList<ColorDrawable>();
 
 	private static final int REQUEST_ENABLE_BT = 1;
-	private static final UUID UBIPLUG_SERVICE = UUID
-			.fromString("a6322521-eb79-4b9f-9152-19daa4870418");
-	private static final UUID UBIPLUG_DATA_CHAR = UUID
-			.fromString("f90ea017-f673-45b8-b00b-16a088a2ed61");
-	private static final UUID CONFIG_DESCRIPTOR = UUID
-			.fromString("00002902-0000-1000-8000-00805f9b34fb");
-	private static final UUID SERVICE1 = UUID
-			.fromString("0000180a-0000-1000-8000-00805f9b34fb");
-	private static final UUID SERVICE2 = UUID
-			.fromString("00001800-0000-1000-8000-00805f9b34fb");
 
 	@SuppressLint("NewApi")
 	@Override
@@ -76,9 +61,9 @@ public class MainActivity extends Activity implements Serializable {
 
 		// getActionBar().setDisplayShowHomeEnabled(false);
 		getActionBar().hide();
-		// Flat UI
-		// FlatUI.initDefaultValues(this);
-		// FlatUI.setDefaultTheme(FlatUI.DEEP);
+
+		this.deviceArrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1);
 
 		// KitKat tint effect
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -87,17 +72,9 @@ public class MainActivity extends Activity implements Serializable {
 					WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 			w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
 					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			SystemBarTintManager tintManager = new SystemBarTintManager(this);
-			SystemBarTintManager.SystemBarConfig config = tintManager
-					.getConfig();
 
 			int actualColor = getResources().getColor(
 					android.R.color.holo_blue_dark);
-			tintManager.setTintColor(actualColor);
-			tintManager
-					.setStatusBarTintDrawable(new ColorDrawable(actualColor));
-			// getActionBar()
-			// .setBackgroundDrawable(new ColorDrawable(actualColor));
 		}
 		BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
 		this.mBluetoothAdapter = manager.getAdapter();
@@ -105,21 +82,19 @@ public class MainActivity extends Activity implements Serializable {
 				.getAssets(), "fonts/open-sans-regular.ttf");
 
 		// UI elements
-		this.mCardArrayAdapter = new CardArrayAdapter(this, this.cards);
-		this.listView = (CardListView) findViewById(R.id.list_cards);
-		this.listView.setAdapter(this.mCardArrayAdapter);
+		this.listView = (ListView) findViewById(R.id.listView);
+		this.listView.setAdapter(this.deviceArrayAdapter);
 		this.listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				/*
-				 * ConnectThread connection = new ConnectThread(
-				 * MainActivity.this.deviceList.get(arg2)); Log.v("Connection",
-				 * connection.toString());
-				 */
-				MainActivity.this.startActivity(new Intent(MainActivity.this,
-						BluetoothHDPActivity.class));
+				MainActivity.this.mBluetoothAdapter.cancelDiscovery();
+				Log.v("Device", MainActivity.this.deviceList.get(arg2)
+						.getName());
+				Intent i = new Intent(MainActivity.this, ConnectActivity.class);
+				i.putExtra("device", MainActivity.this.deviceList.get(arg2));
+				startActivity(i);
 			}
 
 		});
@@ -196,12 +171,9 @@ public class MainActivity extends Activity implements Serializable {
 							.getAddress())) {
 						MainActivity.this.deviceNames.add(device.getAddress());
 
-						// Create a Card
-						Card card = addStuff(device.getName(),
-								device.getAddress());
-
-						MainActivity.this.mCardArrayAdapter.add(card);
-						MainActivity.this.mCardArrayAdapter
+						MainActivity.this.deviceArrayAdapter.add(device
+								.getAddress() + " " + device.getName());
+						MainActivity.this.deviceArrayAdapter
 								.notifyDataSetChanged();
 						if (!MainActivity.this.sent) {
 							// ConnectThread connection = new
@@ -215,7 +187,6 @@ public class MainActivity extends Activity implements Serializable {
 				}
 				if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
 					Log.v("Bluetooth", "Discovery finished");
-					MainActivity.this.mCardArrayAdapter.setEnableUndo(true);
 				}
 			}
 		};
@@ -223,8 +194,7 @@ public class MainActivity extends Activity implements Serializable {
 		// Register the BroadcastReceiver
 		this.filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 		registerReceiver(this.mReceiver, this.filter);
-		MainActivity.this.startActivity(new Intent(MainActivity.this,
-				BluetoothHDPActivity.class));
+
 	}
 	@Override
 	protected void onStart() {
@@ -276,10 +246,6 @@ public class MainActivity extends Activity implements Serializable {
 			case R.id.mnuScan :
 				this.mnuScan = item;
 				item.setActionView(R.layout.refresh_menuitem);
-
-				UUID[] serviceUUIDList;
-				serviceUUIDList = new UUID[]{UBIPLUG_SERVICE, SERVICE1,
-						SERVICE2};
 				return true;
 		}
 		return true;
@@ -299,29 +265,5 @@ public class MainActivity extends Activity implements Serializable {
 				finish();
 			}
 		}
-	}
-
-	private Card addStuff(String name, String mac) {
-		Card card = new Card(this);
-		card.setId(mac);
-
-		// View header =
-		// getLayoutInflater().inflate(R.layout.custom_card_layout,
-		// null);
-		// TextView txtName = (TextView) MainActivity.this
-		// .findViewById(R.id.txt_name);
-		// card.setInnerLayout(header);
-		// CardHeader cardHeader = new CardHeader(this);
-		// card.addCardHeader(cardHeader);
-
-		card.setBackgroundResource(this.bkgDrawables.get(this.colorCounter % 6)); // (int)
-		// (Math.random()
-		// * (5 + 1))
-		this.colorCounter++;
-		card.setCardView((CardView) MainActivity.this.findViewById(R.id.cardid));
-		card.setTitle("\n  " + name + "\n\n" + "  " + mac);
-		card.setSwipeable(true);
-		// MainActivity.this.mCardArrayAdapter.setEnableUndo(true);
-		return card;
 	}
 }

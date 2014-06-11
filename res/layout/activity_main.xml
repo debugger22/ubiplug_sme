@@ -1,23 +1,24 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:card="http://schemas.android.com/apk/res-auto"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/silver"
-      android:paddingTop="30dp"
-      android:paddingRight="5dp"
-      android:paddingLeft="5dp"
-      android:paddingBottom ="5dp">
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="30dp" >
 
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent">
-    
-    <it.gmariotti.cardslib.library.view.CardListView
-        xmlns:card="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_cards"
-        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout" />
+
+          <ListView
+              android:id="@+id/listView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true" >
+
+          </ListView>
 
       </RelativeLayout>
 
