@@ -2,9 +2,15 @@ package com.pirhoalpha.awairhome;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-import org.json.JSONObject;
+import org.json.simple.parser.ContainerFactory;
+import org.json.simple.parser.JSONParser;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -41,26 +47,25 @@ public class ConnectActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_connect);
-		this.mDevice = getIntent().getExtras().getParcelable("device");
+		mDevice = getIntent().getExtras().getParcelable("device");
 
-		this.device_text = (TextView) findViewById(R.id.device_text);
-		this.mTxtReceive = (TextView) findViewById(R.id.mTxtReceive);
-		this.device_text.setText(this.mDevice.getName() + " "
-				+ this.mDevice.getAddress());
-		Log.v("GOT Device", this.mDevice.getName());
+		device_text = (TextView) findViewById(R.id.device_text);
+		mTxtReceive = (TextView) findViewById(R.id.mTxtReceive);
+		device_text.setText(mDevice.getName() + " " + mDevice.getAddress());
+		Log.v("GOT Device", mDevice.getName());
 
-		this.txtCO = (TextView) findViewById(R.id.txtCO);
-		this.txtVOC = (TextView) findViewById(R.id.txtVOC);
-		this.txtDust = (TextView) findViewById(R.id.txtDust);
-		this.txtLight = (TextView) findViewById(R.id.txtLight);
-		this.txtHumidity = (TextView) findViewById(R.id.txtHumidity);
-		this.txtTemperature = (TextView) findViewById(R.id.txtTemperature);
+		txtCO = (TextView) findViewById(R.id.txtCO);
+		txtVOC = (TextView) findViewById(R.id.txtVOC);
+		txtDust = (TextView) findViewById(R.id.txtDust);
+		txtLight = (TextView) findViewById(R.id.txtLight);
+		txtHumidity = (TextView) findViewById(R.id.txtHumidity);
+		txtTemperature = (TextView) findViewById(R.id.txtTemperature);
 
 	}
 
 	@Override
 	protected void onResume() {
-		if (this.mBTSocket == null || !this.mIsBluetoothConnected) {
+		if (mBTSocket == null || !mIsBluetoothConnected) {
 			new ConnectBT().execute();
 		}
 		super.onResume();
@@ -72,12 +77,12 @@ public class ConnectActivity extends Activity {
 		private final Thread t;
 
 		public ReadInput() {
-			this.t = new Thread(this, "Input Thread");
-			this.t.start();
+			t = new Thread(this, "Input Thread");
+			t.start();
 		}
 
 		public boolean isRunning() {
-			return this.t.isAlive();
+			return t.isAlive();
 		}
 
 		@Override
@@ -85,8 +90,8 @@ public class ConnectActivity extends Activity {
 			InputStream inputStream;
 
 			try {
-				inputStream = ConnectActivity.this.mBTSocket.getInputStream();
-				while (!this.bStop) {
+				inputStream = mBTSocket.getInputStream();
+				while (!bStop) {
 					byte[] buffer = new byte[256];
 					if (inputStream.available() > 0) {
 						inputStream.read(buffer);
@@ -101,44 +106,49 @@ public class ConnectActivity extends Activity {
 						final String strInput = new String(buffer, 0, i);
 
 						try {
-							JSONObject jsonObj = new JSONObject(strInput);
-							ConnectActivity.this.txtCO.setText(jsonObj
-									.getString("co"));
-							ConnectActivity.this.txtVOC.setText(jsonObj
-									.getString("voc"));
-							ConnectActivity.this.txtDust.setText(jsonObj
-									.getString("dust"));
-							ConnectActivity.this.txtHumidity.setText(jsonObj
-									.getString("hum"));
-							ConnectActivity.this.txtLight.setText(jsonObj
-									.getString("light"));
-							ConnectActivity.this.txtTemperature.setText(jsonObj
-									.getString("temp"));
+							// JSONObject jsonObj = new JSONObject(strInput);
+							JSONParser parser = new JSONParser();
+							ContainerFactory containerFactory = new ContainerFactory() {
+								@Override
+								public List creatArrayContainer() {
+									return new LinkedList();
+								}
+
+								@Override
+								public Map createObjectContainer() {
+									return new LinkedHashMap();
+								}
+							};
+							@SuppressWarnings("unchecked")
+							HashMap<String, String> data = (HashMap<String, String>) parser
+									.parse(strInput, containerFactory);
+							txtCO.setText(data.get("co"));
+							txtVOC.setText(data.get("voc"));
+							txtDust.setText(data.get("dust"));
+							txtHumidity.setText(data.get("hum"));
+							txtLight.setText(data.get("light"));
+							txtTemperature.setText(data.get("temp"));
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							Log.v("Parse error", e.toString());
 						}
 
-						ConnectActivity.this.mTxtReceive.post(new Runnable() {
+						mTxtReceive.post(new Runnable() {
 							@Override
 							public void run() {
-								ConnectActivity.this.mTxtReceive
-										.append(strInput);
+								mTxtReceive.append(strInput);
 								// Uncomment below for testing
 								// mTxtReceive.append("\n");
 								// mTxtReceive.append("Chars: " +
 								// strInput.length() + " Lines: " +
 								// mTxtReceive.getLineCount() + "\n");
 
-								int txtLength = ConnectActivity.this.mTxtReceive
-										.getEditableText().length();
-								if (txtLength > ConnectActivity.this.mMaxChars) {
-									ConnectActivity.this.mTxtReceive
-											.getEditableText()
-											.delete(0,
-													txtLength
-															- ConnectActivity.this.mMaxChars);
+								int txtLength = mTxtReceive.getEditableText()
+										.length();
+								if (txtLength > mMaxChars) {
+									mTxtReceive.getEditableText().delete(0,
+											txtLength - mMaxChars);
 								}
 							}
 						});
@@ -157,7 +167,7 @@ public class ConnectActivity extends Activity {
 		}
 
 		public void stop() {
-			this.bStop = true;
+			bStop = true;
 		}
 
 	}
@@ -167,27 +177,26 @@ public class ConnectActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			ConnectActivity.this.progressDialog = ProgressDialog.show(
-					ConnectActivity.this, "Hold on", "Connecting");
+			progressDialog = ProgressDialog.show(ConnectActivity.this,
+					"Hold on", "Connecting");
 		}
 
 		@Override
 		protected Void doInBackground(Void... devices) {
 
 			try {
-				if (ConnectActivity.this.mBTSocket == null
-						|| !ConnectActivity.this.mIsBluetoothConnected) {
-					ConnectActivity.this.mBTSocket = ConnectActivity.this.mDevice
-							.createInsecureRfcommSocketToServiceRecord(ConnectActivity.this.mDeviceUUID);
+				if (mBTSocket == null || !mIsBluetoothConnected) {
+					mBTSocket = mDevice
+							.createInsecureRfcommSocketToServiceRecord(mDeviceUUID);
 					BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
-					ConnectActivity.this.mBTSocket.connect();
-					ConnectActivity.this.progressDialog.dismiss();
+					mBTSocket.connect();
+					progressDialog.dismiss();
 					new ReadInput();
 				}
 			} catch (IOException e) {
 				// Unable to connect to device
 				e.printStackTrace();
-				this.mConnectSuccessful = false;
+				mConnectSuccessful = false;
 			}
 			return null;
 		}

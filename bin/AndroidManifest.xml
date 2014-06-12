@@ -31,12 +31,7 @@
             android:label="@string/home" >
 
        </activity>
-       <activity
-            android:name="com.pirhoalpha.awairhome.FirstActivity"
-            android:label="@string/home" >
 
-       </activity>
-        <activity android:name="app.akexorcist.bluetoothspp.DeviceList" />
         <activity android:name=".ConnectActivity" />       
         <service
             android:name="com.pirhoalpha.awairhome.BluetoothHDPService"

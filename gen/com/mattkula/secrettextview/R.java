@@ -8,15 +8,15 @@ package com.mattkula.secrettextview;
 
 public final class R {
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f020013;
+		public static final int ic_launcher = 0x7f020012;
 	}
 	public static final class id {
-		public static final int textview = 0x7f09004b;
+		public static final int textview = 0x7f050045;
 	}
 	public static final class layout {
-		public static final int main = 0x7f03001d;
+		public static final int main = 0x7f030018;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f070000;
+		public static final int app_name = 0x7f040000;
 	}
 }
