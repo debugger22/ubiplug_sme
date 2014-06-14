@@ -17,6 +17,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,6 +56,8 @@ public class ConnectActivity extends Activity {
 
 		mTxtReceive = (TextView) findViewById(R.id.mTxtReceive);
 		Log.v("GOT Device", mDevice.getName());
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// init CardView
 		mCardView = (CardUI) findViewById(R.id.cardsview);

@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements Serializable {
 		// getActionBar().setDisplayShowHomeEnabled(false);
 		getActionBar().hide();
 
-		this.deviceArrayAdapter = new ArrayAdapter<String>(this,
+		deviceArrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1);
 
 		// KitKat tint effect
@@ -76,41 +76,47 @@ public class MainActivity extends Activity implements Serializable {
 			int actualColor = getResources().getColor(
 					android.R.color.holo_blue_dark);
 		}
-		BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-		this.mBluetoothAdapter = manager.getAdapter();
+		try {
+			BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+			mBluetoothAdapter = manager.getAdapter();
+		} catch (NoClassDefFoundError e) {
+			Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT)
+					.show();
+			finish();
+		}
+
 		Typeface tf = Typeface.createFromAsset(getApplicationContext()
 				.getAssets(), "fonts/open-sans-regular.ttf");
 
 		// UI elements
-		this.listView = (ListView) findViewById(R.id.listView);
-		this.listView.setAdapter(this.deviceArrayAdapter);
-		this.listView.setOnItemClickListener(new OnItemClickListener() {
+		listView = (ListView) findViewById(R.id.listView);
+		listView.setAdapter(deviceArrayAdapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				MainActivity.this.mBluetoothAdapter.cancelDiscovery();
-				Log.v("Device", MainActivity.this.deviceList.get(arg2)
-						.getName());
+				mBluetoothAdapter.cancelDiscovery();
+				Log.v("Device", deviceList.get(arg2).getName());
 				Intent i = new Intent(MainActivity.this, ConnectActivity.class);
-				i.putExtra("device", MainActivity.this.deviceList.get(arg2));
+				i.putExtra("device", deviceList.get(arg2));
 				startActivity(i);
 			}
 
 		});
 
 		// Pick all background drawables in an ArrayList
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_green)));
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_blue)));
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_orange)));
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_yellow)));
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_cyan)));
-		this.bkgDrawables.add(new ColorDrawable(getResources().getColor(
+		bkgDrawables.add(new ColorDrawable(getResources().getColor(
 				R.color.gk_red)));
 
 		// Get handle of Bluetooth adapter
@@ -153,7 +159,7 @@ public class MainActivity extends Activity implements Serializable {
 		// }
 		// }
 		// Create a BroadcastReceiver for ACTION_FOUND
-		this.mReceiver = new BroadcastReceiver() {
+		mReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				String action = intent.getAction();
@@ -162,25 +168,23 @@ public class MainActivity extends Activity implements Serializable {
 					// Get the BluetoothDevice object from the Intent
 					BluetoothDevice device = intent
 							.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-					MainActivity.this.deviceList.add(device);
+					deviceList.add(device);
 					Log.v("Device",
 							device.getName() + " " + device.getAddress());
 
 					// Show only if it is not there
-					if (!MainActivity.this.deviceNames.contains(device
-							.getAddress())) {
-						MainActivity.this.deviceNames.add(device.getAddress());
+					if (!deviceNames.contains(device.getAddress())) {
+						deviceNames.add(device.getAddress());
 
-						MainActivity.this.deviceArrayAdapter.add(device
-								.getAddress() + " " + device.getName());
-						MainActivity.this.deviceArrayAdapter
-								.notifyDataSetChanged();
-						if (!MainActivity.this.sent) {
+						deviceArrayAdapter.add(device.getAddress() + " "
+								+ device.getName());
+						deviceArrayAdapter.notifyDataSetChanged();
+						if (!sent) {
 							// ConnectThread connection = new
 							// ConnectThread(device);
 							// Log.v("Bluetooth", connection.toString());
 						}
-						MainActivity.this.sent = true;
+						sent = true;
 
 					}
 
@@ -192,8 +196,8 @@ public class MainActivity extends Activity implements Serializable {
 		};
 
 		// Register the BroadcastReceiver
-		this.filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-		registerReceiver(this.mReceiver, this.filter);
+		filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+		registerReceiver(mReceiver, filter);
 
 	}
 	@Override
@@ -224,15 +228,15 @@ public class MainActivity extends Activity implements Serializable {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		this.unregisterReceiver(this.mReceiver);
+		this.unregisterReceiver(mReceiver);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		this.mnuScan = menu.findItem(R.id.mnuScan);
-		this.mnuScan.setActionView(R.layout.refresh_menuitem);
+		mnuScan = menu.findItem(R.id.mnuScan);
+		mnuScan.setActionView(R.layout.refresh_menuitem);
 		return true;
 	}
 
@@ -244,7 +248,7 @@ public class MainActivity extends Activity implements Serializable {
 						Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.mnuScan :
-				this.mnuScan = item;
+				mnuScan = item;
 				item.setActionView(R.layout.refresh_menuitem);
 				return true;
 		}
@@ -256,7 +260,7 @@ public class MainActivity extends Activity implements Serializable {
 		if (requestCode == REQUEST_ENABLE_BT) {
 			if (resultCode == RESULT_OK) {
 				// User enabled Bluetooth
-				this.mBluetoothAdapter.startDiscovery();
+				mBluetoothAdapter.startDiscovery();
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// User denied to enable Bluetooth
