@@ -44,4 +44,9 @@
     <string name="desc">Light Indicator</string>
     <string name="version">Version: </string>
     
+    <string name="title">Title</string>
+    <string name="desc">Description</string>
+    <string name="overflow">Menu Overflow</string>
+    <string name="color_stripe">Color Stripe</string>
+    
 </resources>

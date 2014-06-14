@@ -2,133 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/device_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Device Name"
-        android:textSize="20dp" />
+    
+    <com.fima.cardsui.views.CardUI
+        android:id="@+id/cardsview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/mTxtReceive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/device_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="mTxtReceive" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/mTxtReceive"
-        android:layout_marginTop="54dp" >
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp" >
-            
-            <TextView
-                android:id="@+id/co_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="CO" />
-
-            <TextView
-                android:id="@+id/voc_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="VOC" />
-            
-            <TextView
-                android:id="@+id/light_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Light" />
-
-            <TextView
-                android:id="@+id/dust_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Dust" />
-
-            <TextView
-                android:id="@+id/hum_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Humidity" />
-
-            <TextView
-                android:id="@+id/temp_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Temperature" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp" >
-
-            <TextView
-                android:id="@+id/txtCO"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/txtVOC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/txtDust"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/txtLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/txtHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/txtTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </LinearLayout>
-
-    </LinearLayout>
+        android:visibility="gone"
+        android:text="mTxtReceive" />
 
 </RelativeLayout>

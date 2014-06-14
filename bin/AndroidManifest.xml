@@ -33,11 +33,6 @@
        </activity>
 
         <activity android:name=".ConnectActivity" />       
-        <service
-            android:name="com.pirhoalpha.awairhome.BluetoothHDPService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
        
 </application>
 
